@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome | Happy Birthday Mom!</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Quicksand', 'Segoe UI', Arial, sans-serif;
+      background: #f8e8ff;
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+      position: relative;
+    }
+    .balloon-garland {
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 0.5rem;
+      padding: 1.2rem 0 0.5rem 0;
+      position: relative;
+      z-index: 3;
+      background: transparent;
+      flex-wrap: wrap;
+    }
+    .balloon {
+      width: 38px;
+      height: 54px;
+      margin: 0 2px;
+      display: inline-block;
+      position: relative;
+      animation: floatBalloon 3.5s ease-in-out infinite alternate;
+    }
+    .balloon:nth-child(2n) { animation-delay: 0.7s; }
+    .balloon:nth-child(3n) { animation-delay: 1.2s; }
+    .balloon:nth-child(4n) { animation-delay: 1.7s; }
+    @keyframes floatBalloon {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(-12px) scale(1.04); }
+    }
+    .streamer-bg {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: repeating-linear-gradient(105deg, #e57373 0 8px, transparent 8px 24px),
+                  repeating-linear-gradient(75deg, #ffd54f 0 8px, transparent 8px 24px),
+                  repeating-linear-gradient(120deg, #81c784 0 8px, transparent 8px 24px),
+                  repeating-linear-gradient(60deg, #ba68c8 0 8px, transparent 8px 24px);
+      opacity: 0.13;
+      mix-blend-mode: multiply;
+    }
+    .content-box {
+      position: relative;
+      z-index: 2;
+      background: rgba(255,255,255,0.92);
+      border-radius: 2rem;
+      box-shadow: 0 8px 40px #d7266022, 0 2px 8px #fff8;
+      max-width: 95vw;
+      width: 400px;
+      margin: 10vh auto 0 auto;
+      padding: 2.5rem 1.5rem 2.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: 2px solid #ffb6b9;
+      animation: box-pop 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    @keyframes box-pop {
+      0% { transform: scale(0.7); opacity: 0; }
+      80% { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+    .main-title {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.1rem;
+      color: #d72660;
+      margin-bottom: 0.7rem;
+      text-shadow: 2px 2px 8px #fff6, 0 0 10px #fcb69f;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+    .subtitle {
+      font-size: 1.1rem;
+      color: #ff9800;
+      margin-bottom: 1.2rem;
+      text-align: center;
+      font-weight: 700;
+    }
+    .reveal-btn {
+      display: inline-block;
+      padding: 0.9rem 2.5rem;
+      border-radius: 30px;
+      background: linear-gradient(90deg, #d72660 0%, #ff9800 100%);
+      color: #fff;
+      font-size: 1.3rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 4px 24px #d7266022;
+      transition: background 0.2s, transform 0.2s;
+      margin-top: 2.2rem;
+      letter-spacing: 1px;
+    }
+    .reveal-btn:hover {
+      background: linear-gradient(90deg, #ff9800 0%, #d72660 100%);
+      transform: scale(1.07);
+    }
+    @media (max-width: 600px) {
+      .content-box {
+        width: 98vw;
+        padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+        margin-top: 4vh;
+      }
+      .main-title {
+        font-size: 1.3rem;
+      }
+      .subtitle {
+        font-size: 1rem;
+      }
+      .balloon {
+        width: 28px;
+        height: 38px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="streamer-bg"></div>
+  <div class="balloon-garland">
+    <!-- SVG Balloons for realistic effect, arranged in a wavy/curved pattern -->
+    <svg class="balloon" style="top: 0px; left: 0px; transform: translateY(0px) rotate(-8deg);" viewBox="0 0 38 54"><ellipse cx="19" cy="22" rx="18" ry="20" fill="#ffeb3b"/><ellipse cx="19" cy="18" rx="8" ry="4" fill="#fff" opacity="0.18"/><rect x="17" y="42" width="4" height="8" rx="2" fill="#bdb76b"/><path d="M19 50 Q21 52 19 54 Q17 52 19 50" stroke="#bdb76b" stroke-width="1.5" fill="none"/><path d="M19 42 Q19 48 19 54" stroke="#bdb76b" stroke-width="1.2" fill="none"/></svg>
+    <svg class="balloon" style="top: 8px; left: 0px; transform: translateY(8px) rotate(6deg);" viewBox="0 0 38 54"><ellipse cx="19" cy="22" rx="18" ry="20" fill="#e57373"/><ellipse cx="19" cy="18" rx="8" ry="4" fill="#fff" opacity="0.18"/><rect x="17" y="42" width="4" height="8" rx="2" fill="#b71c1c"/><path d="M19 50 Q21 52 19 54 Q17 52 19 50" stroke="#b71c1c" stroke-width="1.5" fill="none"/><path d="M19 42 Q19 48 19 54" stroke="#b71c1c" stroke-width="1.2" fill="none"/></svg>
+    <svg class="balloon" style="top: 16px; left: 0px; transform: translateY(16px) rotate(-10deg);" viewBox="0 0 38 54"><ellipse cx="19" cy="22" rx="18" ry="20" fill="#ffd54f"/><ellipse cx="19" cy="18" rx="8" ry="4" fill="#fff" opacity="0.18"/><rect x="17" y="42" width="4" height="8" rx="2" fill="#ffb300"/><path d="M19 50 Q21 52 19 54 Q17 52 19 50" stroke="#ffb300" stroke-width="1.5" fill="none"/><path d="M19 42 Q19 48 19 54" stroke="#ffb300" stroke-width="1.2" fill="none"/></svg>
+    <svg class="balloon" style="top: 8px; left: 0px; transform: translateY(8px) rotate(8deg);" viewBox="0 0 38 54"><ellipse cx="19" cy="22" rx="18" ry="20" fill="#81c784"/><ellipse cx="19" cy="18" rx="8" ry="4" fill="#fff" opacity="0.18"/><rect x="17" y="42" width="4" height="8" rx="2" fill="#388e3c"/><path d="M19 50 Q21 52 19 54 Q17 52 19 50" stroke="#388e3c" stroke-width="1.5" fill="none"/><path d="M19 42 Q19 48 19 54" stroke="#388e3c" stroke-width="1.2" fill="none"/></svg>
+    <svg class="balloon" style="top: 0px; left: 0px; transform: translateY(0px) rotate(-6deg);" viewBox="0 0 38 54"><ellipse cx="19" cy="22" rx="18" ry="20" fill="#ba68c8"/><ellipse cx="19" cy="18" rx="8" ry="4" fill="#fff" opacity="0.18"/><rect x="17" y="42" width="4" height="8" rx="2" fill="#6a1b9a"/><path d="M19 50 Q21 52 19 54 Q17 52 19 50" stroke="#6a1b9a" stroke-width="1.5" fill="none"/><path d="M19 42 Q19 48 19 54" stroke="#6a1b9a" stroke-width="1.2" fill="none"/></svg>
+    <svg class="balloon" style="top: 8px; left: 0px; transform: translateY(8px) rotate(10deg);" viewBox="0 0 38 54"><ellipse cx="19" cy="22" rx="18" ry="20" fill="#ffd54f"/><ellipse cx="19" cy="18" rx="8" ry="4" fill="#fff" opacity="0.18"/><rect x="17" y="42" width="4" height="8" rx="2" fill="#ffb300"/><path d="M19 50 Q21 52 19 54 Q17 52 19 50" stroke="#ffb300" stroke-width="1.5" fill="none"/><path d="M19 42 Q19 48 19 54" stroke="#ffb300" stroke-width="1.2" fill="none"/></svg>
+    <svg class="balloon" style="top: 16px; left: 0px; transform: translateY(16px) rotate(-12deg);" viewBox="0 0 38 54"><ellipse cx="19" cy="22" rx="18" ry="20" fill="#e57373"/><ellipse cx="19" cy="18" rx="8" ry="4" fill="#fff" opacity="0.18"/><rect x="17" y="42" width="4" height="8" rx="2" fill="#b71c1c"/><path d="M19 50 Q21 52 19 54 Q17 52 19 50" stroke="#b71c1c" stroke-width="1.5" fill="none"/><path d="M19 42 Q19 48 19 54" stroke="#b71c1c" stroke-width="1.2" fill="none"/></svg>
+    <svg class="balloon" style="top: 8px; left: 0px; transform: translateY(8px) rotate(12deg);" viewBox="0 0 38 54"><ellipse cx="19" cy="22" rx="18" ry="20" fill="#ffeb3b"/><ellipse cx="19" cy="18" rx="8" ry="4" fill="#fff" opacity="0.18"/><rect x="17" y="42" width="4" height="8" rx="2" fill="#bdb76b"/><path d="M19 50 Q21 52 19 54 Q17 52 19 50" stroke="#bdb76b" stroke-width="1.5" fill="none"/><path d="M19 42 Q19 48 19 54" stroke="#bdb76b" stroke-width="1.2" fill="none"/></svg>
+  </div>
+  <div class="content-box">
+    <div class="main-title">Happy Birthday, Mom! 🎂🎉</div>
+    <div class="subtitle">Welcome to your special day!</div>
+    <a href="gift.html" class="reveal-btn">Reveal Your Gift</a>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>

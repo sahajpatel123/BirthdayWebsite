@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy 42nd Birthday Paaddiiii!</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;700&family=Great+Vibes&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #fffde4 0%, #fcb69f 100%);
+      font-family: 'Quicksand', Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow-x: hidden;
+    }
+    .confetti-bg {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .wish-card {
+      background: #fff;
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 40px #d7266022, 0 2px 8px #fff8;
+      max-width: 420px;
+      width: 95vw;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 2.2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: card-pop 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+      z-index: 2;
+      position: relative;
+    }
+    @keyframes card-pop {
+      0% { transform: scale(0.7) translateY(60px); opacity: 0; }
+      80% { transform: scale(1.05) translateY(-8px); opacity: 1; }
+      100% { transform: scale(1) translateY(0); }
+    }
+    .wish-heading {
+      font-family: 'Great Vibes', 'Pacifico', cursive;
+      color: #e91e63;
+      font-size: 2.1rem;
+      margin-bottom: 0.2rem;
+      text-align: center;
+      letter-spacing: 1px;
+      animation: fadeInDown 1.2s 0.2s both;
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .wish-sub {
+      color: #888;
+      font-size: 1rem;
+      margin-bottom: 1.1rem;
+      font-style: italic;
+      text-align: center;
+      animation: fadeIn 1.2s 0.5s both;
+    }
+    .wish-main {
+      color: #222;
+      font-size: 1.15rem;
+      margin-bottom: 1.2rem;
+      text-align: center;
+      font-weight: 500;
+      animation: fadeIn 1.2s 0.7s both;
+    }
+    .wish-age {
+      font-size: 2.7rem;
+      font-weight: bold;
+      color: #222;
+      margin: 0.2rem 0 0.2rem 0;
+      position: relative;
+      z-index: 1;
+      animation: pop 1.2s 1s both;
+    }
+    .wish-age-underline {
+      display: block;
+      width: 40px;
+      height: 4px;
+      background: linear-gradient(90deg, #e91e63 0%, #ff9800 100%);
+      border-radius: 2px;
+      margin: 0.2rem auto 1.1rem auto;
+      animation: underline-grow 1.1s 1.2s both;
+    }
+    @keyframes underline-grow {
+      from { width: 0; opacity: 0; }
+      to { width: 40px; opacity: 1; }
+    }
+    .wish-message {
+      color: #444;
+      font-size: 1.05rem;
+      margin-bottom: 1.7rem;
+      text-align: center;
+      animation: fadeIn 1.2s 1.3s both;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .memory-lane {
+      font-size: 1.1rem;
+      color: #d72660;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      text-align: center;
+      animation: fadeIn 1.2s 1.5s both;
+    }
+    .memory-lane span {
+      font-size: 1.3rem;
+    }
+    .wish-form {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 0.2rem;
+      animation: fadeIn 1.2s 1.7s both;
+      justify-content: center;
+    }
+    .wish-input {
+      border: 1.5px solid #e91e63;
+      border-radius: 1.2rem;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      outline: none;
+      min-width: 0;
+      width: 170px;
+      transition: box-shadow 0.2s, border 0.2s;
+    }
+    .wish-input:focus {
+      box-shadow: 0 0 0 2px #ffd54f99;
+      border-color: #ff9800;
+    }
+    .wish-btn {
+      background: linear-gradient(90deg, #e91e63 0%, #ff9800 100%);
+      color: #fff;
+      border: none;
+      border-radius: 1.2rem;
+      padding: 0.5rem 1.1rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      box-shadow: 0 2px 8px #d7266022;
+    }
+    .wish-btn:hover {
+      background: linear-gradient(90deg, #ff9800 0%, #e91e63 100%);
+      transform: scale(1.07);
+    }
+    .wish-photo {
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 5px solid #ffb6b9;
+      box-shadow: 0 6px 32px #d7266022;
+      margin-bottom: 1.2rem;
+      background: #fff;
+    }
+    @media (max-width: 600px) {
+      .wish-card {
+        width: 99vw;
+        padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+      }
+      .wish-heading {
+        font-size: 1.3rem;
+      }
+      .wish-age {
+        font-size: 2rem;
+      }
+      .wish-input {
+        width: 90px;
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="confetti-bg"></div>
+  <div class="wish-card">
+    <img src="images/mom.jpg" alt="Mom and Sahaj smiling" class="wish-photo" style="width: 90%; max-width: 260px; height: auto; object-fit: cover; border-radius: 1.2rem; border: 5px solid #ffb6b9; box-shadow: 0 6px 32px #d7266022; margin-bottom: 1.2rem; background: #fff;">
+    <div class="wish-heading">Happy 42nd Birthday,<br>Bhavi!</div>
+    <div class="wish-sub">(aka Paado!)</div>
+    <div class="wish-main">Wishing you a day as amazing as you are!</div>
+    <div class="wish-age">42</div>
+    <span class="wish-age-underline"></span>
+    <div class="wish-message">Wishing you a day filled with joy, laughter, and all the things you love most! May this year bring you as much happiness as you've brought to all of us.</div>
+    <!-- Memory Lane section removed as requested -->
+  </div>
+  <script>
+    // Confetti animation
+    const confettiBg = document.querySelector('.confetti-bg');
+    function createConfetti() {
+      const conf = document.createElement('div');
+      conf.style.position = 'fixed';
+      conf.style.left = Math.random() * 100 + 'vw';
+      conf.style.top = '-30px';
+      conf.style.width = '12px';
+      conf.style.height = '18px';
+      conf.style.background = `hsl(${Math.random()*360},90%,70%)`;
+      conf.style.opacity = 0.8;
+      conf.style.borderRadius = '4px';
+      conf.style.transform = `rotate(${Math.random()*360}deg)`;
+      conf.style.zIndex = 1;
+      conf.style.pointerEvents = 'none';
+      confettiBg.appendChild(conf);
+      const duration = 3 + Math.random()*2;
+      conf.animate([
+        { transform: conf.style.transform, top: '-30px' },
+        { transform: `rotate(${Math.random()*360}deg)`, top: '110vh' }
+      ], {
+        duration: duration * 1000,
+        easing: 'ease-in',
+        fill: 'forwards'
+      });
+      setTimeout(() => conf.remove(), duration * 1000);
+    }
+    setInterval(createConfetti, 180);
+    for (let i = 0; i < 24; i++) createConfetti();
+  </script>
+</body>
+</html> 
