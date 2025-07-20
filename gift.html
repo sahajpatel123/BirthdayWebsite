@@ -184,8 +184,10 @@
   </style>
 </head>
 <body>
+  <canvas id="fireworks-canvas" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none;"></canvas>
   <div class="confetti-bg"></div>
-  <div class="wish-card">
+  <div class="wish-card" style="position:relative;overflow:hidden;">
+    <canvas id="card-anim-canvas" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;"></canvas>
     <img src="images/mom.jpg" alt="Mom and Sahaj smiling" class="wish-photo" style="width: 90%; max-width: 260px; height: auto; object-fit: cover; border-radius: 1.2rem; border: 5px solid #ffb6b9; box-shadow: 0 6px 32px #d7266022; margin-bottom: 1.2rem; background: #fff;">
     <div class="wish-heading">Happy 42nd Birthday,<br>Bhavi!</div>
     <div class="wish-sub">(aka Paado!)</div>
@@ -196,7 +198,79 @@
     <!-- Memory Lane section removed as requested -->
   </div>
   <script>
-    // Confetti animation
+    // Fireworks animation
+    const canvas = document.getElementById('fireworks-canvas');
+    const ctx = canvas.getContext('2d');
+    let dpr = window.devicePixelRatio || 1;
+    function resizeCanvas() {
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      canvas.style.width = window.innerWidth + 'px';
+      canvas.style.height = window.innerHeight + 'px';
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    function randomColor() {
+      return `hsl(${Math.random()*360}, 90%, 60%)`;
+    }
+    function Firework() {
+      const x = Math.random() * canvas.width;
+      const y = Math.random() * canvas.height * 0.5 + canvas.height * 0.1;
+      const count = 24 + Math.floor(Math.random()*12);
+      const color = randomColor();
+      const particles = [];
+      for (let i = 0; i < count; i++) {
+        const angle = (Math.PI * 2 * i) / count;
+        const speed = 2 + Math.random() * 2;
+        particles.push({
+          x,
+          y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          alpha: 1,
+          color,
+          size: 2 + Math.random()*2
+        });
+      }
+      this.particles = particles;
+    }
+    Firework.prototype.update = function() {
+      this.particles.forEach(p => {
+        p.x += p.vx * dpr;
+        p.y += p.vy * dpr;
+        p.vx *= 0.98;
+        p.vy *= 0.98;
+        p.vy += 0.01 * dpr;
+        p.alpha -= 0.012 + Math.random()*0.01;
+      });
+      this.particles = this.particles.filter(p => p.alpha > 0);
+    };
+    Firework.prototype.draw = function(ctx) {
+      this.particles.forEach(p => {
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, p.alpha);
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+        ctx.fillStyle = p.color;
+        ctx.shadowColor = p.color;
+        ctx.shadowBlur = 12;
+        ctx.fill();
+        ctx.restore();
+      });
+    };
+    let fireworks = [];
+    function animateFireworks() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (Math.random() < 0.04) fireworks.push(new Firework());
+      fireworks.forEach(fw => fw.update());
+      fireworks.forEach(fw => fw.draw(ctx));
+      fireworks = fireworks.filter(fw => fw.particles.length > 0);
+      requestAnimationFrame(animateFireworks);
+    }
+    animateFireworks();
+
+    // Confetti animation (existing)
     const confettiBg = document.querySelector('.confetti-bg');
     function createConfetti() {
       const conf = document.createElement('div');
@@ -225,6 +299,90 @@
     }
     setInterval(createConfetti, 180);
     for (let i = 0; i < 24; i++) createConfetti();
+
+    // Card confetti/sparkle animation
+    const card = document.querySelector('.wish-card');
+    const cardCanvas = document.getElementById('card-anim-canvas');
+    const cardCtx = cardCanvas.getContext('2d');
+    function resizeCardCanvas() {
+      cardCanvas.width = card.offsetWidth;
+      cardCanvas.height = card.offsetHeight;
+    }
+    resizeCardCanvas();
+    window.addEventListener('resize', resizeCardCanvas);
+    // Confetti particles inside card
+    function CardConfetti() {
+      this.x = Math.random() * cardCanvas.width;
+      this.y = -10;
+      this.size = 4 + Math.random() * 6;
+      this.color = `hsl(${Math.random()*360},90%,70%)`;
+      this.vx = (Math.random()-0.5)*1.2;
+      this.vy = 1.2 + Math.random()*1.5;
+      this.alpha = 1;
+      this.shape = Math.random() > 0.5 ? 'rect' : 'circle';
+    }
+    CardConfetti.prototype.update = function() {
+      this.x += this.vx;
+      this.y += this.vy;
+      this.vx *= 0.98;
+      this.vy += 0.04;
+      this.alpha -= 0.008 + Math.random()*0.01;
+    };
+    CardConfetti.prototype.draw = function(ctx) {
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, this.alpha);
+      ctx.fillStyle = this.color;
+      if (this.shape === 'rect') {
+        ctx.fillRect(this.x, this.y, this.size, this.size);
+      } else {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size/2, 0, Math.PI*2);
+        ctx.fill();
+      }
+      ctx.restore();
+    };
+    // Sparkle burst
+    function CardSparkle() {
+      this.x = Math.random() * cardCanvas.width * 0.8 + cardCanvas.width*0.1;
+      this.y = Math.random() * cardCanvas.height * 0.7 + cardCanvas.height*0.1;
+      this.radius = 0;
+      this.maxRadius = 12 + Math.random()*10;
+      this.alpha = 1;
+      this.color = `hsl(${Math.random()*360},90%,80%)`;
+    }
+    CardSparkle.prototype.update = function() {
+      this.radius += 0.8;
+      this.alpha -= 0.04;
+    };
+    CardSparkle.prototype.draw = function(ctx) {
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, this.alpha);
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2);
+      ctx.strokeStyle = this.color;
+      ctx.lineWidth = 2.2;
+      ctx.shadowColor = this.color;
+      ctx.shadowBlur = 8;
+      ctx.stroke();
+      ctx.restore();
+    };
+    let cardConfetti = [];
+    let cardSparkles = [];
+    function animateCardEffects() {
+      cardCtx.clearRect(0, 0, cardCanvas.width, cardCanvas.height);
+      // Add confetti
+      if (Math.random() < 0.18) cardConfetti.push(new CardConfetti());
+      cardConfetti.forEach(c => c.update());
+      cardConfetti.forEach(c => c.draw(cardCtx));
+      cardConfetti = cardConfetti.filter(c => c.alpha > 0 && c.y < cardCanvas.height+10);
+      // Add sparkles
+      if (Math.random() < 0.012) cardSparkles.push(new CardSparkle());
+      cardSparkles.forEach(s => s.update());
+      cardSparkles.forEach(s => s.draw(cardCtx));
+      cardSparkles = cardSparkles.filter(s => s.alpha > 0);
+      requestAnimationFrame(animateCardEffects);
+    }
+    animateCardEffects();
   </script>
 </body>
 </html> 
